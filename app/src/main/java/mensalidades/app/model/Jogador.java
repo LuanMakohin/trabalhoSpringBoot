@@ -1,12 +1,14 @@
 package mensalidades.app.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,9 +26,16 @@ public class Jogador {
     private String email;
 
     @Column
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
-    public Jogador(String nome, String email, Date dataNascimento) {
+    @OneToMany(mappedBy ="jogador")
+    private List<Mensalidade> mensalidades;
+
+    public Jogador() {
+        // Construtor padrão sem argumentos
+     }
+
+    public Jogador(String nome, String email, LocalDate dataNascimento) {
         this.nome = nome;
         this.email = email;
         this.dataNascimento = dataNascimento;
@@ -50,10 +59,10 @@ public class Jogador {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

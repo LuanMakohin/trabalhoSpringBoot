@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -25,8 +26,23 @@ public class Mensalidade{
     @Column
     private double valor;
 
+
     @ManyToOne
+    @JoinColumn(name = "jogador_id", nullable = false)
     private Jogador jogador;
+
+    public Mensalidade (){
+
+    }
+
+    public Mensalidade(int ano, int mes, double valor, Jogador jogador) {
+        this.ano = ano;
+        this.mes = mes;
+        this.valor = valor;
+        this.jogador = jogador;
+    }
+
+
 
     public long getId() {
         return id;
@@ -58,6 +74,15 @@ public class Mensalidade{
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    
+    public Jogador getJogador() {
+        return jogador;
+    }
+
+    public void setJogador(Jogador jogador) {
+        this.jogador = jogador;
     }
 
     
